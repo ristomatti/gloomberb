@@ -166,6 +166,7 @@ interface StockChartProps {
   showVolume?: boolean;
   footerControls?: ReactNode;
   footerHints?: PaneHint[];
+  visible?: boolean;
 }
 
 interface ResolvedStockChartProps extends StockChartProps {
@@ -1487,6 +1488,7 @@ export const ResolvedStockChart = memo(function ResolvedStockChart({
   showVolume: showVolumeOverride,
   footerControls,
   footerHints,
+  visible = true,
   symbol,
   ticker,
   financials,
@@ -3286,7 +3288,7 @@ export const ResolvedStockChart = memo(function ResolvedStockChart({
   }, [effectiveRenderer, nativeBaseSurfaceId, nativeCrosshairSurfaceId, nativeSurfaceManager, paneId, renderer, rendererState.nativeReady]);
 
   useEffect(() => {
-    if (effectiveRenderer !== "kitty" || !rendererState.nativeReady || !renderer.resolution || !plotRef.current || !nativeBaseScene) {
+    if (!visible || effectiveRenderer !== "kitty" || !rendererState.nativeReady || !renderer.resolution || !plotRef.current || !nativeBaseScene) {
       lastNativeBaseBitmapRef.current = null;
       nativeSurfaceManager.removeSurface(nativeBaseSurfaceId);
       return;
@@ -3355,10 +3357,11 @@ export const ResolvedStockChart = memo(function ResolvedStockChart({
     renderer,
     rendererState.nativeReady,
     showVolume,
+    visible,
   ]);
 
   useEffect(() => {
-    if (effectiveRenderer !== "kitty" || !rendererState.nativeReady || !renderer.resolution || !plotRef.current || !nativeCrosshair) {
+    if (!visible || effectiveRenderer !== "kitty" || !rendererState.nativeReady || !renderer.resolution || !plotRef.current || !nativeCrosshair) {
       lastNativeCrosshairBitmapRef.current = null;
       nativeSurfaceManager.removeSurface(nativeCrosshairSurfaceId);
       return;
@@ -3428,6 +3431,7 @@ export const ResolvedStockChart = memo(function ResolvedStockChart({
     paneId,
     renderer,
     rendererState.nativeReady,
+    visible,
   ]);
 
   const hasHistory = chartWindow.points.length > 0;

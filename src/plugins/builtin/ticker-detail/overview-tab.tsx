@@ -291,11 +291,13 @@ export function OverviewTab({
   symbol,
   ticker,
   financials,
+  visible = true,
 }: {
   width?: number;
   symbol: string | null;
   ticker: TickerRecord | null;
   financials: TickerFinancials | null;
+  visible?: boolean;
 }) {
   const baseCurrency = useAppSelector((state) => state.config.baseCurrency);
   const exchangeRatesState = useAppSelector((state) => state.exchangeRates);
@@ -560,6 +562,7 @@ export function OverviewTab({
             height={10}
             focused={false}
             compact
+            visible={visible}
             symbol={symbol}
             ticker={ticker}
             financials={financials}

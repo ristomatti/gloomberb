@@ -24,6 +24,7 @@ export function ChartTab({
   interactive,
   axisMode,
   onActivate,
+  visible = true,
   symbol,
   ticker,
   financials,
@@ -34,6 +35,7 @@ export function ChartTab({
   interactive: boolean;
   axisMode: ChartAxisMode;
   onActivate?: () => void;
+  visible?: boolean;
   symbol: string | null;
   ticker: TickerRecord | null;
   financials: TickerFinancials | null;
@@ -90,6 +92,7 @@ export function ChartTab({
           interactive={interactive}
           onActivate={onActivate}
           axisMode={axisMode}
+          visible={visible}
           symbol={symbol}
           ticker={ticker}
           financials={financials}

@@ -215,6 +215,7 @@ export function TickerDetailPane({ focused, width, height }: PaneProps) {
               symbol={symbol}
               ticker={ticker}
               financials={financials}
+              visible={resolvedTabId === "overview"}
             />
           </Box>
         )}
@@ -251,6 +252,7 @@ export function TickerDetailPane({ focused, width, height }: PaneProps) {
               interactive={chartInteractive}
               axisMode={paneSettings.chartAxisMode}
               onActivate={() => setChartInteractiveEager(true)}
+              visible={resolvedTabId === "chart"}
               symbol={symbol}
               ticker={ticker}
               financials={financials}
