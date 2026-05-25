@@ -79,6 +79,19 @@ export function formatNumber(value: number | undefined, decimals = 2): string {
   return getNumberFormatter(decimals).format(value);
 }
 
+/** Format a signed number with full precision and commas (e.g., +1,234.56) */
+export function formatSigned(value: number | undefined): string {
+  if (value === undefined || value === null || Number.isNaN(value)) return "—";
+  const formatted = getNumberFormatter(2).format(Math.abs(value));
+  return `${value >= 0 ? "+" : "-"}${formatted}`;
+}
+
+/** Format a number with full precision and commas (e.g., -1,234.56) */
+export function formatPrecise(value: number | undefined): string {
+  if (value === undefined || value === null || Number.isNaN(value)) return "—";
+  return getNumberFormatter(2).format(value);
+}
+
 /** Format a growth rate compactly (e.g., +12%, -5%) */
 export function formatGrowthShort(value: number): string {
   const pct = value * 100;

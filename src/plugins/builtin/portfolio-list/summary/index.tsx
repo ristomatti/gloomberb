@@ -7,7 +7,7 @@ import type { BrokerConnectionStatus } from "../../../../types/broker";
 import type { TickerFinancials } from "../../../../types/financials";
 import type { Portfolio, TickerRecord } from "../../../../types/ticker";
 import type { BrokerAccount, BrokerCashBalance } from "../../../../types/trading";
-import { formatCompact, formatPercentRaw } from "../../../../utils/format";
+import { formatPercentRaw, formatPrecise, formatSigned } from "../../../../utils/format";
 import { getBrokerInstance } from "../../../../utils/broker-instances";
 import { resolvePortfolioAccountMetrics, resolvePortfolioMarketValue } from "../account-metrics";
 import { calculatePortfolioSummaryTotals, type PortfolioSummaryTotals } from "./totals";
@@ -48,10 +48,6 @@ function createSummarySegment(
     parts,
     length: parts.reduce((sum, part) => sum + part.text.length, 0) + Math.max(0, parts.length - 1),
   };
-}
-
-function formatSignedCompact(value: number): string {
-  return `${value >= 0 ? "+" : ""}${formatCompact(value)}`;
 }
 
 function formatMonthDay(date: Date): string {
@@ -201,30 +197,30 @@ export function buildPortfolioSummarySegments({
   if (accountState?.account.netLiquidation != null) {
     candidates.push(createSummarySegment("netliq", [
       { text: "Net Liq", tone: "label" },
-      { text: formatCompact(accountState.account.netLiquidation), tone: "value", bold: true },
+      { text: formatPrecise(accountState.account.netLiquidation), tone: "value", bold: true },
     ]));
   }
 
   candidates.push(createSummarySegment("val", [
     { text: "Val", tone: "label" },
-    { text: formatCompact(totalMarketValue), tone: "value", bold: true },
+    { text: formatPrecise(totalMarketValue), tone: "value", bold: true },
   ]));
 
   if (accountState?.account.totalCashValue != null) {
     candidates.push(createSummarySegment("cash", [
       { text: "Cash", tone: "label" },
-      { text: formatCompact(accountState.account.totalCashValue), tone: "value", bold: true },
+      { text: formatPrecise(accountState.account.totalCashValue), tone: "value", bold: true },
     ]));
   }
 
   candidates.push(createSummarySegment("day", [
     { text: "Day", tone: "label" },
-    { text: formatSignedCompact(accountMetrics.dailyPnl), tone: "value", color: priceColor(accountMetrics.dailyPnl), bold: true },
+    { text: formatSigned(accountMetrics.dailyPnl), tone: "value", color: priceColor(accountMetrics.dailyPnl), bold: true },
     { text: `(${formatPercentRaw(accountMetrics.dailyPnlPct)})`, tone: "muted", color: priceColor(accountMetrics.dailyPnlPct) },
   ]));
   candidates.push(createSummarySegment("pnl", [
     { text: "P&L", tone: "label" },
-    { text: formatSignedCompact(accountMetrics.unrealizedPnl), tone: "value", color: priceColor(accountMetrics.unrealizedPnl), bold: true },
+    { text: formatSigned(accountMetrics.unrealizedPnl), tone: "value", color: priceColor(accountMetrics.unrealizedPnl), bold: true },
     { text: `(${formatPercentRaw(accountMetrics.unrealizedPnlPct)})`, tone: "muted", color: priceColor(accountMetrics.unrealizedPnlPct) },
   ]));
 
@@ -234,31 +230,31 @@ export function buildPortfolioSummarySegments({
       accountMetrics.realizedPnl != null
         ? createSummarySegment("realized", [
           { text: "Realized", tone: "label" },
-          { text: formatSignedCompact(accountMetrics.realizedPnl), tone: "value", color: priceColor(accountMetrics.realizedPnl), bold: true },
+          { text: formatSigned(accountMetrics.realizedPnl), tone: "value", color: priceColor(accountMetrics.realizedPnl), bold: true },
         ])
         : null,
       account.settledCash != null
         ? createSummarySegment("settled", [
           { text: "Settled", tone: "label" },
-          { text: formatCompact(account.settledCash), tone: "value", bold: true },
+          { text: formatPrecise(account.settledCash), tone: "value", bold: true },
         ])
         : null,
       account.availableFunds != null
         ? createSummarySegment("avail", [
           { text: "Avail", tone: "label" },
-          { text: formatCompact(account.availableFunds), tone: "value", bold: true },
+          { text: formatPrecise(account.availableFunds), tone: "value", bold: true },
         ])
         : null,
       account.excessLiquidity != null
         ? createSummarySegment("excess", [
           { text: "Excess", tone: "label" },
-          { text: formatCompact(account.excessLiquidity), tone: "value", bold: true },
+          { text: formatPrecise(account.excessLiquidity), tone: "value", bold: true },
         ])
         : null,
       account.buyingPower != null
         ? createSummarySegment("bp", [
           { text: "BP", tone: "label" },
-          { text: formatCompact(account.buyingPower), tone: "value", bold: true },
+          { text: formatPrecise(account.buyingPower), tone: "value", bold: true },
         ])
         : null,
       createSummarySegment("source", [
@@ -385,37 +381,37 @@ export function renderSummarySegments(segments: PortfolioSummarySegment[], width
 export function buildDrawerMetricSegments(account: BrokerAccount, widthBudget: number): PortfolioSummarySegment[] {
   const candidates = [
     account.dailyPnl != null
-      ? createSummarySegment("day", [{ text: "Day", tone: "label" }, { text: formatSignedCompact(account.dailyPnl), tone: "value", color: priceColor(account.dailyPnl), bold: true }])
+      ? createSummarySegment("day", [{ text: "Day", tone: "label" }, { text: formatSigned(account.dailyPnl), tone: "value", color: priceColor(account.dailyPnl), bold: true }])
       : null,
     account.unrealizedPnl != null
-      ? createSummarySegment("unreal", [{ text: "Unreal", tone: "label" }, { text: formatSignedCompact(account.unrealizedPnl), tone: "value", color: priceColor(account.unrealizedPnl), bold: true }])
+      ? createSummarySegment("unreal", [{ text: "Unreal", tone: "label" }, { text: formatSigned(account.unrealizedPnl), tone: "value", color: priceColor(account.unrealizedPnl), bold: true }])
       : null,
     account.realizedPnl != null
-      ? createSummarySegment("realized", [{ text: "Realized", tone: "label" }, { text: formatSignedCompact(account.realizedPnl), tone: "value", color: priceColor(account.realizedPnl), bold: true }])
+      ? createSummarySegment("realized", [{ text: "Realized", tone: "label" }, { text: formatSigned(account.realizedPnl), tone: "value", color: priceColor(account.realizedPnl), bold: true }])
       : null,
     account.totalCashValue != null
-      ? createSummarySegment("cash", [{ text: "Cash", tone: "label" }, { text: formatCompact(account.totalCashValue), tone: "value", bold: true }])
+      ? createSummarySegment("cash", [{ text: "Cash", tone: "label" }, { text: formatPrecise(account.totalCashValue), tone: "value", bold: true }])
       : null,
     account.settledCash != null
-      ? createSummarySegment("settled", [{ text: "Settled", tone: "label" }, { text: formatCompact(account.settledCash), tone: "value", bold: true }])
+      ? createSummarySegment("settled", [{ text: "Settled", tone: "label" }, { text: formatPrecise(account.settledCash), tone: "value", bold: true }])
       : null,
     account.netLiquidation != null
-      ? createSummarySegment("netliq", [{ text: "Net Liq", tone: "label" }, { text: formatCompact(account.netLiquidation), tone: "value", bold: true }])
+      ? createSummarySegment("netliq", [{ text: "Net Liq", tone: "label" }, { text: formatPrecise(account.netLiquidation), tone: "value", bold: true }])
       : null,
     account.availableFunds != null
-      ? createSummarySegment("avail", [{ text: "Avail", tone: "label" }, { text: formatCompact(account.availableFunds), tone: "value", bold: true }])
+      ? createSummarySegment("avail", [{ text: "Avail", tone: "label" }, { text: formatPrecise(account.availableFunds), tone: "value", bold: true }])
       : null,
     account.excessLiquidity != null
-      ? createSummarySegment("excess", [{ text: "Excess", tone: "label" }, { text: formatCompact(account.excessLiquidity), tone: "value", bold: true }])
+      ? createSummarySegment("excess", [{ text: "Excess", tone: "label" }, { text: formatPrecise(account.excessLiquidity), tone: "value", bold: true }])
       : null,
     account.buyingPower != null
-      ? createSummarySegment("bp", [{ text: "BP", tone: "label" }, { text: formatCompact(account.buyingPower), tone: "value", bold: true }])
+      ? createSummarySegment("bp", [{ text: "BP", tone: "label" }, { text: formatPrecise(account.buyingPower), tone: "value", bold: true }])
       : null,
     account.initMarginReq != null
-      ? createSummarySegment("init", [{ text: "Init", tone: "label" }, { text: formatCompact(account.initMarginReq), tone: "value", bold: true }])
+      ? createSummarySegment("init", [{ text: "Init", tone: "label" }, { text: formatPrecise(account.initMarginReq), tone: "value", bold: true }])
       : null,
     account.maintMarginReq != null
-      ? createSummarySegment("maint", [{ text: "Maint", tone: "label" }, { text: formatCompact(account.maintMarginReq), tone: "value", bold: true }])
+      ? createSummarySegment("maint", [{ text: "Maint", tone: "label" }, { text: formatPrecise(account.maintMarginReq), tone: "value", bold: true }])
       : null,
   ].filter((segment): segment is PortfolioSummarySegment => segment != null);
 

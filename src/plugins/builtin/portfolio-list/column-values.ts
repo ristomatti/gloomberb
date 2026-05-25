@@ -4,7 +4,7 @@ import type { EarningsEvent } from "../../../types/data-provider";
 import type { TickerRecord } from "../../../types/ticker";
 import { priceColor } from "../../../theme/colors";
 import { formatQuoteAgeWithSource, resolveQuoteAgeTimestamp } from "../../../market-data/quotes/time";
-import { convertCurrency, formatCompact, formatNumber, formatPercentRaw } from "../../../utils/format";
+import { convertCurrency, formatCompact, formatNumber, formatPercentRaw, formatPrecise, formatSigned } from "../../../utils/format";
 import {
   formatMarketCost,
   formatMarketPrice,
@@ -307,16 +307,16 @@ export function getColumnValue(
       return { text: totalShares !== 0 ? formatMarketQuantity(totalShares, { ...formatOptions, maxWidth: col.width }) : "—" };
     case "avg_cost":
       if (totalCostUnits === 0) return { text: "—" };
-      return { text: formatMarketCost(totalCost / Math.abs(totalCostUnits), { ...formatOptions, maxWidth: col.width }) };
+      return { text: formatNumber(totalCost / Math.abs(totalCostUnits)) };
     case "cost_basis":
       if (totalCost === 0) return { text: "—" };
-      return { text: formatCompact(toBasePosition(totalCost)) };
+      return { text: formatPrecise(toBasePosition(totalCost)) };
     case "mkt_value":
       if (activeQuote && totalPriceUnits !== 0) {
-        return { text: formatCompact(toBaseQuote(Math.abs(totalPriceUnits) * activeQuote.price)) };
+        return { text: formatPrecise(toBaseQuote(Math.abs(totalPriceUnits) * activeQuote.price)) };
       }
       if (brokerFallbackMktValue != null) {
-        return { text: formatCompact(toBasePosition(brokerFallbackMktValue)) };
+        return { text: formatPrecise(toBasePosition(brokerFallbackMktValue)) };
       }
       return { text: "—" };
     case "weight": {
@@ -327,17 +327,17 @@ export function getColumnValue(
     case "day_pnl":
       if (activeQuote && totalPriceUnits !== 0) {
         const dayPnl = toBaseQuote(totalPriceUnits * activeQuote.change);
-        return { text: `${dayPnl >= 0 ? "+" : ""}${formatCompact(dayPnl)}`, color: priceColor(dayPnl) };
+        return { text: formatSigned(dayPnl), color: priceColor(dayPnl) };
       }
       return { text: "—" };
     case "pnl":
       if (activeQuote && totalPriceUnits !== 0) {
         const pnl = toBaseQuote(Math.abs(totalPriceUnits) * activeQuote.price) - toBasePosition(totalCost);
-        return { text: `${pnl >= 0 ? "+" : ""}${formatCompact(pnl)}`, color: priceColor(pnl) };
+        return { text: formatSigned(pnl), color: priceColor(pnl) };
       }
       if (brokerFallbackPnl != null) {
         const pnl = toBasePosition(brokerFallbackPnl);
-        return { text: `${pnl >= 0 ? "+" : ""}${formatCompact(pnl)}`, color: priceColor(pnl) };
+        return { text: formatSigned(pnl), color: priceColor(pnl) };
       }
       return { text: "—" };
     case "pnl_pct":
