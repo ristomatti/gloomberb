@@ -45,7 +45,7 @@ export function buildBar(changePercent: number, barWidth: number): string {
 }
 
 export function formatTime(date: Date): string {
-  return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: false });
 }
 
 function createLoadingRows(sectors: readonly SectorDef[]): SectorRow[] {

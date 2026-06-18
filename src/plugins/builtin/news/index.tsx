@@ -35,7 +35,7 @@ function getFeedItems(
       detailTitle: item.title,
       detailMeta: [
         item.source,
-        `Published ${item.publishedAt.toLocaleString("en-US", {
+        `Published ${item.publishedAt.toLocaleString("en-GB", {
           month: "short",
           day: "numeric",
           year: "numeric",

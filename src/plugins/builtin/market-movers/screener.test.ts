@@ -152,7 +152,7 @@ describe("fetchScreener", () => {
 
       expect(parsed.pathname).toBe("/v1/finance/screener/predefined/saved");
       expect(parsed.searchParams.get("formatted")).toBe("false");
-      expect(parsed.searchParams.get("lang")).toBe("en-US");
+      expect(parsed.searchParams.get("lang")).toBe("en-GB");
       expect(parsed.searchParams.get("region")).toBe("US");
       expect(parsed.searchParams.get("scrIds")).toBe("day_gainers");
       expect(parsed.searchParams.get("count")).toBe("2");

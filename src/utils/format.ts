@@ -6,7 +6,7 @@ const numberFormatters = new Map<number, Intl.NumberFormat>();
 function getCurrencyFormatter(currency: string): Intl.NumberFormat {
   let formatter = currencyFormatters.get(currency);
   if (!formatter) {
-    formatter = new Intl.NumberFormat("en-US", {
+    formatter = new Intl.NumberFormat("en-GB", {
       style: "currency",
       currency,
       minimumFractionDigits: 2,
@@ -20,7 +20,7 @@ function getCurrencyFormatter(currency: string): Intl.NumberFormat {
 function getNumberFormatter(decimals: number): Intl.NumberFormat {
   let formatter = numberFormatters.get(decimals);
   if (!formatter) {
-    formatter = new Intl.NumberFormat("en-US", {
+    formatter = new Intl.NumberFormat("en-GB", {
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals,
     });
@@ -239,5 +239,5 @@ export function formatTimeAgo(date: Date | string): string {
   if (hours < 24) return `${hours}h ago`;
   const days = Math.floor(hours / 24);
   if (days < 7) return `${days}d ago`;
-  return new Date(ts).toLocaleDateString("en-US", { month: "numeric", day: "numeric", year: "2-digit" });
+  return new Date(ts).toLocaleDateString("en-GB", { month: "numeric", day: "numeric", year: "2-digit" });
 }

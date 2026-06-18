@@ -33,7 +33,7 @@ function formatCompactAxisValue(value: number, units: string): string {
   if (abs >= 1_000_000_000) return `${(value / 1_000_000_000).toFixed(1)}B`;
   if (abs >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
   if (abs >= 1_000) return `${(value / 1_000).toFixed(abs >= 10_000 ? 0 : 1)}K`;
-  return value.toLocaleString("en-US", { maximumFractionDigits: abs >= 10 ? 1 : 2 });
+  return value.toLocaleString("en-GB", { maximumFractionDigits: abs >= 10 ? 1 : 2 });
 }
 
 export function EconDetailView({ event, width, height, focused }: EconDetailViewProps) {
@@ -187,7 +187,7 @@ export function EconDetailView({ event, width, height, focused }: EconDetailView
   const ascObs = observations;
   const tableRows = descObs.slice(0, 12).map((obs) => {
     if (mapping.displayMode !== "change" || obs.value == null) {
-      return { date: obs.date, display: obs.value != null ? obs.value.toLocaleString("en-US", { maximumFractionDigits: 1 }) : "—" };
+      return { date: obs.date, display: obs.value != null ? obs.value.toLocaleString("en-GB", { maximumFractionDigits: 1 }) : "—" };
     }
     const ascIdx = ascObs.findIndex((o) => o.date === obs.date);
     if (ascIdx > 0 && ascObs[ascIdx - 1]!.value != null) {
@@ -195,7 +195,7 @@ export function EconDetailView({ event, width, height, focused }: EconDetailView
       const pct = ((obs.value - prior) / Math.abs(prior)) * 100;
       return { date: obs.date, display: `${pct >= 0 ? "+" : ""}${pct.toFixed(1)}%` };
     }
-    return { date: obs.date, display: obs.value.toLocaleString("en-US", { maximumFractionDigits: 1 }) };
+    return { date: obs.date, display: obs.value.toLocaleString("en-GB", { maximumFractionDigits: 1 }) };
   });
   const units = info?.units ?? "";
   const title = info?.title ?? event.event;

@@ -136,7 +136,7 @@ function isSocialEmbed(attrs: string, inner: string, links: ExtractedLink[]): bo
 function formatTweetDateLabel(value: unknown): string | null {
   const parsed = parseDateIso(value);
   if (!parsed) return stringValue(value);
-  return new Date(parsed).toLocaleDateString("en-US", {
+  return new Date(parsed).toLocaleDateString("en-GB", {
     month: "short",
     day: "numeric",
     year: "numeric",

@@ -27,12 +27,12 @@ export function formatDetailDate(value: DisplayDateValue, fallback = "-"): strin
   const date = parseDisplayDate(value);
   if (!date) return fallback;
 
-  const datePart = date.toLocaleDateString("en-US", {
+  const datePart = date.toLocaleDateString("en-GB", {
     month: "short",
     day: "numeric",
     year: "numeric",
   });
-  const timePart = date.toLocaleTimeString("en-US", {
+  const timePart = date.toLocaleTimeString("en-GB", {
     hour: "numeric",
     minute: "2-digit",
   });

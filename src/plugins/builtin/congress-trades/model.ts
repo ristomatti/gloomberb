@@ -47,7 +47,7 @@ export function formatShortDate(value: string | null): string {
   if (!value) return "--";
   const timestamp = Date.parse(`${value}T00:00:00Z`);
   if (!Number.isFinite(timestamp)) return "--";
-  return new Date(timestamp).toLocaleDateString("en-US", {
+  return new Date(timestamp).toLocaleDateString("en-GB", {
     month: "short",
     day: "numeric",
     timeZone: "UTC",
@@ -79,7 +79,7 @@ export function formatAmountRange(low: number | null, high: number | null, raw?:
 }
 
 function compareText(left: string, right: string): number {
-  return left.localeCompare(right, "en-US", { sensitivity: "base" });
+  return left.localeCompare(right, "en-GB", { sensitivity: "base" });
 }
 
 function compareTrade(

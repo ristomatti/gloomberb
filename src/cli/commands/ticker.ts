@@ -98,7 +98,7 @@ function normalizeTimestamp(value: Date | string | number | undefined): number |
 function formatFeedDate(value: Date | string | number | undefined): string {
   const timestamp = normalizeTimestamp(value);
   if (timestamp == null) return "";
-  return new Date(timestamp).toLocaleDateString("en-US", {
+  return new Date(timestamp).toLocaleDateString("en-GB", {
     month: "short",
     day: "numeric",
     year: "numeric",

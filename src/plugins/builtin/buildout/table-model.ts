@@ -179,7 +179,7 @@ export function columnsForTab(activeTab: BuildoutTabId, selectedList: BuildoutLi
 }
 
 function compareText(left: string, right: string) {
-  return left.localeCompare(right, "en-US", { sensitivity: "base" });
+  return left.localeCompare(right, "en-GB", { sensitivity: "base" });
 }
 
 function compareValues(left: SortComparable, right: SortComparable, direction: SortDirection) {

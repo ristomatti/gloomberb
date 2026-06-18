@@ -20,7 +20,7 @@ export function formatSignedPercentRaw(value: number): string {
 
 export function formatTimestamp(timestamp: number | undefined): string {
   if (!timestamp) return "—";
-  return new Date(timestamp).toLocaleString("en-US", {
+  return new Date(timestamp).toLocaleString("en-GB", {
     month: "short",
     day: "numeric",
     year: "numeric",

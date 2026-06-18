@@ -56,12 +56,12 @@ export function formatPublishedAt(value: string | null): string {
   if (Number.isNaN(date.getTime())) return "-";
   const now = new Date();
   const sameYear = date.getFullYear() === now.getFullYear();
-  const datePart = date.toLocaleDateString("en-US", {
+  const datePart = date.toLocaleDateString("en-GB", {
     month: "short",
     day: "numeric",
     ...(sameYear ? {} : { year: "2-digit" as const }),
   });
-  const timePart = date.toLocaleTimeString("en-US", {
+  const timePart = date.toLocaleTimeString("en-GB", {
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,

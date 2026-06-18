@@ -96,7 +96,7 @@ export function formatPredictionEndsAt(
     const minutes = absMinutes % 60;
     return delta >= 0 ? `${hours}h ${minutes}m` : `${hours}h ago`;
   }
-  return date.toLocaleString("en-US", {
+  return date.toLocaleString("en-GB", {
     month: "numeric",
     day: "numeric",
     hour: "2-digit",

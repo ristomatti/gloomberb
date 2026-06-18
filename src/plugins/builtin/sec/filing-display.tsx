@@ -12,7 +12,7 @@ export function formatFilingShortDate(value: Date | string | number): string {
 }
 
 export function formatFilingMetaDate(value: Date): string {
-  return value.toLocaleString("en-US", {
+  return value.toLocaleString("en-GB", {
     month: "short",
     day: "numeric",
     year: "numeric",

@@ -71,7 +71,7 @@ function timestampValue(item: FeedDataTableItem): number {
 }
 
 function compareText(a: string, b: string): number {
-  return a.localeCompare(b, "en-US", { sensitivity: "base" });
+  return a.localeCompare(b, "en-GB", { sensitivity: "base" });
 }
 
 function compareRows(a: DetailRow, b: DetailRow, columnId: DetailColumnId) {

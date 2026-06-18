@@ -42,7 +42,7 @@ export function PredictionMarketTradesView({
         switch (column.id) {
           case "time":
             return {
-              text: new Date(trade.timestamp).toLocaleTimeString("en-US", {
+              text: new Date(trade.timestamp).toLocaleTimeString("en-GB", {
                 hour12: false,
               }),
               color: colors.textDim,

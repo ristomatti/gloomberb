@@ -51,7 +51,7 @@ function createSummarySegment(
 }
 
 function formatMonthDay(date: Date): string {
-  return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  return date.toLocaleDateString("en-GB", { month: "short", day: "numeric" });
 }
 
 function parseIsoDateAsLocalDate(value: string): Date | null {
@@ -313,7 +313,7 @@ export function buildPortfolioFooterSegments({
   const refreshText = refreshingSize > 0
     ? "Refreshing..."
     : lastRefreshTimestamp != null
-      ? new Date(lastRefreshTimestamp).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })
+      ? new Date(lastRefreshTimestamp).toLocaleTimeString("en-GB", { hour: "numeric", minute: "2-digit" })
       : "-";
   const totals = calculatePortfolioSummaryTotals(
     sortedTickers,

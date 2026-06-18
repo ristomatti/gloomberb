@@ -74,13 +74,13 @@ export function formatAxisValue(format: FearGreedValueFormat): (value: number) =
 
 export function formatUpdatedAt(date: Date | null): string {
   if (!date) return "Last updated --";
-  const parts = new Intl.DateTimeFormat("en-US", {
+  const parts = new Intl.DateTimeFormat("en-GB", {
     timeZone: "America/New_York",
     month: "short",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
-    hour12: true,
+    hour12: false,
   }).formatToParts(date);
   const part = (type: Intl.DateTimeFormatPartTypes) => parts.find((entry) => entry.type === type)?.value ?? "";
   return `Last updated ${part("month")} ${part("day")} at ${part("hour")}:${part("minute")} ${part("dayPeriod")} ET`;

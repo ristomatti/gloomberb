@@ -32,7 +32,7 @@ type LoadStatus = "idle" | "loading" | "loaded" | "error";
 function formatReleaseDate(value: string): string {
   const timestamp = Date.parse(value);
   if (!Number.isFinite(timestamp)) return "";
-  return new Date(timestamp).toLocaleDateString("en-US", {
+  return new Date(timestamp).toLocaleDateString("en-GB", {
     month: "short",
     day: "numeric",
     year: "numeric",

@@ -77,7 +77,7 @@ function arrayField(raw: RawObject, ...keys: string[]): RawObject[] {
 
 function compactInteger(value: number | null | undefined): string | null {
   if (value == null || !Number.isFinite(value)) return null;
-  return new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(value);
+  return new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 }).format(value);
 }
 
 function normalizeSource(raw: RawObject): BuildoutSource {

@@ -38,7 +38,7 @@ interface NewsArticleStackBaseProps {
 }
 
 function compareText(a: string, b: string): number {
-  return a.localeCompare(b, "en-US", { sensitivity: "base" });
+  return a.localeCompare(b, "en-GB", { sensitivity: "base" });
 }
 
 function compareArticle(a: MarketNewsItem, b: MarketNewsItem, columnId: NewsColumnId): number {

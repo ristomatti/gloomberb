@@ -8,7 +8,7 @@ describe("exchange metadata", () => {
 
     expect(missing).toEqual([]);
     for (const exchange of canonicalExchanges) {
-      expect(() => new Intl.DateTimeFormat("en-US", {
+      expect(() => new Intl.DateTimeFormat("en-GB", {
         timeZone: EXCHANGE_TIME_ZONES[exchange],
       })).not.toThrow();
     }

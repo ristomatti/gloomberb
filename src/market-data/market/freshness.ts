@@ -49,7 +49,7 @@ function isUsExtendedHoursExchange(exchange?: string): boolean {
 function getExchangeLocalDateFormatter(timeZone: string): Intl.DateTimeFormat {
   let formatter = exchangeLocalDateFormatters.get(timeZone);
   if (!formatter) {
-    formatter = new Intl.DateTimeFormat("en-CA", {
+    formatter = new Intl.DateTimeFormat("en-GB", {
       timeZone,
       year: "numeric",
       month: "2-digit",
@@ -63,7 +63,7 @@ function getExchangeLocalDateFormatter(timeZone: string): Intl.DateTimeFormat {
 function getExchangeLocalTimeFormatter(timeZone: string): Intl.DateTimeFormat {
   let formatter = exchangeLocalTimeFormatters.get(timeZone);
   if (!formatter) {
-    formatter = new Intl.DateTimeFormat("en-US", {
+    formatter = new Intl.DateTimeFormat("en-GB", {
       timeZone,
       hour: "2-digit",
       minute: "2-digit",

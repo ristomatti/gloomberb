@@ -32,7 +32,7 @@ function getZonedFormatter(timeZone: string): Intl.DateTimeFormat {
   const cached = zonedFormatterCache.get(timeZone);
   if (cached) return cached;
 
-  const formatter = new Intl.DateTimeFormat("en-US", {
+  const formatter = new Intl.DateTimeFormat("en-GB", {
     timeZone,
     hourCycle: "h23",
     year: "numeric",

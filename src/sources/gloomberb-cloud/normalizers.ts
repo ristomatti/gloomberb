@@ -105,7 +105,7 @@ const LOCAL_DATE_TIME_PATTERN =
 const EXPLICIT_TIME_ZONE_PATTERN = /(?:Z|[+-]\d{2}:?\d{2})$/i;
 
 function getZonedDateParts(date: Date, timeZone: string): Map<string, string> {
-  const formatter = new Intl.DateTimeFormat("en-US", {
+  const formatter = new Intl.DateTimeFormat("en-GB", {
     timeZone,
     hourCycle: "h23",
     year: "numeric",

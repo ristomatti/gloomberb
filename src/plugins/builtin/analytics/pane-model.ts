@@ -42,7 +42,7 @@ function formatIsoDateMonthDay(value: string): string {
   const match = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if (!match) return value;
   const [, year, month, day] = match;
-  return new Date(Number(year), Number(month) - 1, Number(day)).toLocaleDateString("en-US", {
+  return new Date(Number(year), Number(month) - 1, Number(day)).toLocaleDateString("en-GB", {
     month: "short",
     day: "numeric",
   });

@@ -208,7 +208,7 @@ export async function fetchScreener(
   const load = async () => {
     const data = await api.fetchJson("/v1/finance/screener/predefined/saved", {
       formatted: "false",
-      lang: "en-US",
+      lang: "en-GB",
       region: "US",
       scrIds: category,
       count,

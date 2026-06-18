@@ -35,7 +35,7 @@ function getNumberFormatter(
   const key = `${minimumFractionDigits}:${maximumFractionDigits}:${useGrouping ? 1 : 0}`;
   let formatter = numberFormatters.get(key);
   if (!formatter) {
-    formatter = new Intl.NumberFormat("en-US", {
+    formatter = new Intl.NumberFormat("en-GB", {
       minimumFractionDigits,
       maximumFractionDigits,
       useGrouping,
@@ -50,7 +50,7 @@ function getCurrencySymbol(currency: string): string {
   const cached = currencySymbols.get(normalizedCurrency);
   if (cached) return cached;
 
-  const formatter = new Intl.NumberFormat("en-US", {
+  const formatter = new Intl.NumberFormat("en-GB", {
     style: "currency",
     currency: normalizedCurrency,
     currencyDisplay: "symbol",

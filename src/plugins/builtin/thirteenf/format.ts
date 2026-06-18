@@ -26,7 +26,7 @@ export function formatShortDate(value: string | null | undefined): string {
   if (!value) return "--";
   const timestamp = Date.parse(`${value}T00:00:00Z`);
   if (!Number.isFinite(timestamp)) return "--";
-  return new Date(timestamp).toLocaleDateString("en-US", {
+  return new Date(timestamp).toLocaleDateString("en-GB", {
     month: "short",
     day: "numeric",
     timeZone: "UTC",
