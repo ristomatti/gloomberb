@@ -382,7 +382,7 @@ export function WebDialogFrame({
   title,
   children,
   footer,
-  showTitleDivider = true,
+  showTitleDivider = false,
 }: DialogFrameProps) {
   useThemeColors();
   return (
